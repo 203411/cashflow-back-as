@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'UsuarioLogin',
     'UsuarioRegistro',
+    'FlujoEfectivo',
     
     # Librerias instaladas
     'rest_framework',
