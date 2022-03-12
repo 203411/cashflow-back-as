@@ -6,5 +6,5 @@ from FlujoEfectivo.views import FlujoView
 
 urlpatterns = [
     re_path(r'^efectivo', FlujoView.as_view()),
-    # re_path(r'^modificar/(?P<pk>\d+)$', FlujoView.as_view()),
+    # re_path(r'^modificar/(?P<pk>\d+)$', FlujoViewDetail.as_view()),
 ]
