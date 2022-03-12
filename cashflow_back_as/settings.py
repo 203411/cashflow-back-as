@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'UsuarioLogin',
     'UsuarioRegistro',
     'FlujoEfectivo',
+    'IndicadoresDinero',
     
     # Librerias instaladas
     'rest_framework',

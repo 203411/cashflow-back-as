@@ -15,5 +15,6 @@ class LoginAuth(ObtainAuthToken):
         
         return Response({
             'token' : token.key,
-            'user_id' : user.pk
+            'user_id' : user.pk,
+            'is_superuser' : user.is_superuser
         })

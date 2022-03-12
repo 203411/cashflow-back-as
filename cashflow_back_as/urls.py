@@ -26,4 +26,5 @@ urlpatterns = [
     re_path(r'^cash_flow/login/', include('UsuarioLogin.urls')),
     re_path(r'^cash_flow/registro/', include('UsuarioRegistro.urls')),
     re_path(r'^cash_flow/flujo/', include('FlujoEfectivo.urls')),
+    re_path(r'^cash_flow/indicadores/', include('IndicadoresDinero.urls')),
 ]
