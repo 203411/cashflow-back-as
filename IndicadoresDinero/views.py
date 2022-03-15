@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from IndicadoresDinero.models import IndicadoresModel
 from IndicadoresDinero.serializers import IndicadoresSerializer
+<<<<<<< HEAD
+=======
+from datetime import datetime
+>>>>>>> Develop-Gabriel
 
 # Create your views here.
 class IndicadoresView(APIView):
@@ -13,6 +17,10 @@ class IndicadoresView(APIView):
         return Response(serializer.data, status = status.HTTP_200_OK)
     
     def post(self, request, format = None):
+<<<<<<< HEAD
+=======
+        request.data['fecha'] = datetime.now().strftime("%Y/%m/%d")
+>>>>>>> Develop-Gabriel
         serializer = IndicadoresSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
@@ -34,6 +42,10 @@ class IndicadoresViewDetail(APIView):
         return Response("Sin datos", status = status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, pk, format = None):
+<<<<<<< HEAD
+=======
+        request.data['fecha'] = datetime.now().strftime("%Y/%m/%d")
+>>>>>>> Develop-Gabriel
         idResponse = self.get_object(pk)
         serializer = IndicadoresSerializer(idResponse, data = request.data)
         if serializer.is_valid():

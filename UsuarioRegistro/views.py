@@ -16,7 +16,7 @@ def user_list(request):
         usuario = User.objects.all()
         serializer = RegisterSerializer(usuario, many=True)
         return JsonResponse(serializer.data, safe=False)
- 
+
     elif request.method == 'POST':
         usuario_data = JSONParser().parse(request)
         serializer = RegisterSerializer(data=usuario_data)
