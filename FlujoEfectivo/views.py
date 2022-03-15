@@ -33,7 +33,6 @@ class FlujoView(APIView):
         else:
             return Response("Categoria No existe")
 class FlujoViewDetail(APIView):
-        
     def get_object(self,pk):
         try:
             return FlujoModel.objects.get(pk=pk)

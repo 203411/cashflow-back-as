@@ -18,7 +18,7 @@ class CategoriasView(APIView):
             return CategoriasModel.objects.filter(sub_categoria=sub_categoria)
         except CategoriasModel.DoesNotExist:
             return 0
-    
+
     def post(self, request, format = None):
         exist = self.get_object(request.data['sub_categoria'])
         if(exist == 0):
@@ -29,6 +29,7 @@ class CategoriasView(APIView):
             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
         else:
             return Response("Categoria ya registrada", status = status.HTTP_406_NOT_ACCEPTABLE)
+
 class CategoriasViewDetail(APIView):
     def get_object(self,pk):
         try:
@@ -51,7 +52,7 @@ class CategoriasViewDetail(APIView):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, format = None):
+    def delete(self, pk,request, format = None):
         idResponse = self.get_object(pk)
         if idResponse != 0:
             idResponse.delete()
