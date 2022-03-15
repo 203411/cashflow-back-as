@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from FlujoEfectivo.serializers import FlujoSerializer
 from FlujoEfectivo.models import FlujoModel
+from datetime import datetime
 
 # Create your views here.
 
@@ -14,6 +15,7 @@ class FlujoView(APIView):
         return Response(serializer.data, status = status.HTTP_200_OK)
     
     def post(self, request, format = None):
+        request.data['fecha'] = datetime.now().strftime("%Y/%m/%d")
         serializer = FlujoSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
@@ -36,6 +38,7 @@ class FlujoViewDetail(APIView):
     
     def put(self, request, pk, format = None):
         idResponse = self.get_object(pk)
+        request.data['fecha'] = datetime.now().strftime("%Y/%m/%d")
         serializer = FlujoSerializer(idResponse, data = request.data)
         if serializer.is_valid():
             serializer.save()
