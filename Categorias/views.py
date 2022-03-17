@@ -52,7 +52,7 @@ class CategoriasViewDetail(APIView):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, pk ,request, format = None):
+    def delete(self, request, pk, format = None):
         idResponse = self.get_object(pk)
         if idResponse != 0:
             idResponse.delete()
