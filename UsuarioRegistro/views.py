@@ -1,3 +1,4 @@
+import email
 from django.shortcuts import render
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
@@ -34,15 +35,29 @@ def user_detail(request, pk):
         return JsonResponse({'message': 'No existe el usuario'}, status=status.HTTP_404_NOT_FOUND) 
 
     if request.method == 'GET': 
-        serializer = RegisterSerializer(usuario) 
+        serializer = RegisterSerializer(usuario)
+        # user = User.objects.filter(pk=pk).values()[0]
+        # print(User.objects.filter(pk=pk).values()[0])
         return JsonResponse(serializer.data) 
 
     elif request.method == 'PUT': 
-        usuario_data = JSONParser().parse(request) 
+        usuario_data = JSONParser().parse(request)
+        print(usuario_data.get("password"))
+        print(User.objects.filter(pk=pk).values()[0]["password"])
+        if(usuario_data.get("username") == ""):
+            usuario_data.update(username=User.objects.filter(pk=pk).values()[0]["username"])
+        if(usuario_data.get("email") == ""):
+            usuario_data.update(email=User.objects.filter(pk=pk).values()[0]["email"])
+        if(usuario_data.get("password") == ""):
+            usuario_data.update(password=User.objects.filter(pk=pk).values()[0]["password"])
+        if(usuario_data.get("password2") == ""):
+            usuario_data.update(password2=User.objects.filter(pk=pk).values()[0]["password"])
+        if(usuario_data.get("is_superuser") == ""):
+            usuario_data.update(is_superuser=User.objects.filter(pk=pk).values()[0]["is_superuser"])
         serializer = RegisterSerializer(usuario, data=usuario_data) 
         if serializer.is_valid(): 
             serializer.save() 
-            return JsonResponse(serializer.data) 
+            return JsonResponse(usuario_data) 
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
     elif request.method == 'DELETE': 
