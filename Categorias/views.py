@@ -13,14 +13,14 @@ class CategoriasView(APIView):
         serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
         return Response(serializer.data, status = status.HTTP_200_OK)
     
-    def get_object(self,sub_categoria):
+    def get_object(self,descripcion):
         try:
-            return CategoriasModel.objects.get(sub_categoria=sub_categoria)
+            return CategoriasModel.objects.get(descripcion==descripcion)
         except CategoriasModel.DoesNotExist:
             return 0
 
     def post(self, request, format = None):
-        exist = self.get_object(request.data['sub_categoria'])
+        exist = self.get_object(request.data['descripcion'])
         if(exist == 0):
             serializer = CategoriasSerializer(data = request.data)
             if serializer.is_valid():
