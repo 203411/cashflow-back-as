@@ -13,14 +13,14 @@ class CategoriasView(APIView):
         serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
         return Response(serializer.data, status = status.HTTP_200_OK)
     
-    def get_object(self,descripcion):
+    def get_object(self,sub_categoria):
         try:
-            return CategoriasModel.objects.get(descripcion==descripcion)
+            return CategoriasModel.objects.get(sub_categoria==sub_categoria)
         except CategoriasModel.DoesNotExist:
             return 0
 
     def post(self, request, format = None):
-        exist = self.get_object(request.data['descripcion'])
+        exist = self.get_object(request.data['sub_categoria'])
         if(exist == 0):
             serializer = CategoriasSerializer(data = request.data)
             if serializer.is_valid():
@@ -58,3 +58,22 @@ class CategoriasViewDetail(APIView):
             idResponse.delete()
             return Response("Categoria eliminada", status = status.HTTP_202_ACCEPTED)
         return Response("Categoria no encontrada", status = status.HTTP_400_BAD_REQUEST)
+    
+class CategoriaEntrada(APIView):
+    def get(self, request, format = None):
+        queryset = CategoriasModel.objects.filter(descripcion="INGRESO")
+        serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
+        return Response(serializer.data, status = status.HTTP_200_OK)
+    
+    
+class CategoriaGasto(APIView):
+    def get(self, request, format = None):
+        queryset = CategoriasModel.objects.filter(descripcion = "GASTO-AOC")
+        serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
+class CategoriaCosto(APIView):
+    def get(self, request, format = None):
+        queryset = CategoriasModel.objects.filter(descripcion = "COSTO-VENTA")
+        serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
+        return Response(serializer.data, status = status.HTTP_200_OK)
