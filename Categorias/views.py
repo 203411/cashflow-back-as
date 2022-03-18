@@ -15,7 +15,7 @@ class CategoriasView(APIView):
     
     def get_object(self,sub_categoria):
         try:
-            return CategoriasModel.objects.get(sub_categoria==sub_categoria)
+            return CategoriasModel.objects.get(sub_categoria=sub_categoria)
         except CategoriasModel.DoesNotExist:
             return 0
 
