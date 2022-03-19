@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from IndicadoresDinero.models import IndicadoresModel
 from IndicadoresDinero.serializers import IndicadoresSerializer
+from datetime import datetime
 
 # Create your views here.
 class IndicadoresView(APIView):
@@ -13,6 +14,7 @@ class IndicadoresView(APIView):
         return Response(serializer.data, status = status.HTTP_200_OK)
     
     def post(self, request, format = None):
+        request.data['fecha'] = datetime.now().strftime("%m/%d/%Y")
         serializer = IndicadoresSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
@@ -34,6 +36,7 @@ class IndicadoresViewDetail(APIView):
         return Response("Sin datos", status = status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, pk, format = None):
+        request.data['fecha'] = datetime.now().strftime("%Y/%m/%d")
         idResponse = self.get_object(pk)
         serializer = IndicadoresSerializer(idResponse, data = request.data)
         if serializer.is_valid():
@@ -41,7 +44,7 @@ class IndicadoresViewDetail(APIView):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, format = None):
+    def delete(self, request, pk, format = None):
         idResponse = self.get_object(pk)
         if idResponse != 0:
             idResponse.delete()

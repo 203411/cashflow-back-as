@@ -1,0 +1,59 @@
+[33mcommit 6848e266d2cd49dc9665b92ff27aad914d87c76d[m[33m ([m[1;36mHEAD -> [m[1;32mDevelop-Gabriel[m[33m)[m
+Author: Marisol Solis Lopez <203411@ids.upchiapas.edu.mx>
+Date:   Mon Mar 14 20:54:37 2022 -0600
+
+    Relacion Uno a Muchos Categorias-FlujoEfectivo
+
+[33mcommit 8cfcd31dcbd5532484038450ee591eb4431fb292[m
+Author: Marisol Solis Lopez <203411@ids.upchiapas.edu.mx>
+Date:   Mon Mar 14 19:07:14 2022 -0600
+
+    Atributo fecha agregado a FlujoEfectivo e IndicadoresDinero
+
+[33mcommit d9b89e610fca70dea70de46e55022faa27f08606[m
+Author: Marisol Solis Lopez <203411@ids.upchiapas.edu.mx>
+Date:   Fri Mar 11 21:50:29 2022 -0600
+
+    Componente Categorias creado
+
+[33mcommit 7cb9e1dab2247b339de3ef74e8fdca452f4d7594[m
+Author: Marisol Solis Lopez <203411@ids.upchiapas.edu.mx>
+Date:   Fri Mar 11 21:28:48 2022 -0600
+
+    Componente IndicadoresDinero creado
+
+[33mcommit b296687f516a3b81a175ac73596542ea74a41a16[m
+Author: Marisol Solis Lopez <203411@ids.upchiapas.edu.mx>
+Date:   Thu Mar 10 23:19:17 2022 -0600
+
+    Componente Back-End FlujoEfectivo
+
+[33mcommit 95ccfad73a7590fa66f5fce77abd2de80be35fa3[m
+Author: Marisol Solis Lopez <203411@ids.upchiapas.edu.mx>
+Date:   Thu Mar 10 22:18:49 2022 -0600
+
+    UsuarioLogin y UsuarioRegistro creados
+
+[33mcommit 77600c32388cbca336bc365c79df6fed9af36592[m
+Author: Marisol Solis Lopez <203411@ids.upchiapas.edu.mx>
+Date:   Thu Mar 10 20:19:20 2022 -0600
+
+    Prueba 1
+
+[33mcommit 1514e1948880e068dccb422600ff61634d35ccd0[m
+Author: 203424 <203424@ids.upchiapas.edu.mx>
+Date:   Sat Mar 5 23:42:10 2022 -0600
+
+    First commit
+
+[33mcommit 96d0b9033ad96eb01c0725bc4ebc41005a2d2aef[m[33m ([m[1;32mDevelop-Jesus[m[33m)[m
+Author: 203424 <203424@ids.upchiapas.edu.mx>
+Date:   Sat Mar 5 23:38:01 2022 -0600
+
+    First commit
+
+[33mcommit 6e36a2eff6056dc4ba91dcf204732c99742f7b56[m
+Author: 203424 <203424@ids.upchiapas.edu.mx>
+Date:   Sat Mar 5 23:25:44 2022 -0600
+
+    First commit

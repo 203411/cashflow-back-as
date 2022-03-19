@@ -13,13 +13,23 @@ class CategoriasView(APIView):
         serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
         return Response(serializer.data, status = status.HTTP_200_OK)
     
+    def get_object(self,sub_categoria):
+        try:
+            return CategoriasModel.objects.get(sub_categoria=sub_categoria)
+        except CategoriasModel.DoesNotExist:
+            return 0
+
     def post(self, request, format = None):
-        serializer = CategoriasSerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    
+        exist = self.get_object(request.data['sub_categoria'])
+        if(exist == 0):
+            serializer = CategoriasSerializer(data = request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status = status.HTTP_201_CREATED)
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response("Categoria ya registrada", status = status.HTTP_406_NOT_ACCEPTABLE)
+
 class CategoriasViewDetail(APIView):
     def get_object(self,pk):
         try:
@@ -42,9 +52,28 @@ class CategoriasViewDetail(APIView):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, format = None):
+    def delete(self, request, pk, format = None):
         idResponse = self.get_object(pk)
         if idResponse != 0:
             idResponse.delete()
             return Response("Categoria eliminada", status = status.HTTP_202_ACCEPTED)
         return Response("Categoria no encontrada", status = status.HTTP_400_BAD_REQUEST)
+    
+class CategoriaEntrada(APIView):
+    def get(self, request, format = None):
+        queryset = CategoriasModel.objects.filter(descripcion="INGRESO")
+        serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
+        return Response(serializer.data, status = status.HTTP_200_OK)
+    
+    
+class CategoriaGasto(APIView):
+    def get(self, request, format = None):
+        queryset = CategoriasModel.objects.filter(descripcion = "GASTO-AOC")
+        serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
+class CategoriaCosto(APIView):
+    def get(self, request, format = None):
+        queryset = CategoriasModel.objects.filter(descripcion = "COSTO-VENTA")
+        serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
+        return Response(serializer.data, status = status.HTTP_200_OK)
