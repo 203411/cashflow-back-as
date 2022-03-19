@@ -42,16 +42,21 @@ def user_detail(request, pk):
         usuario_data = JSONParser().parse(request)
         # print(usuario_data.get("password"))
         # print(User.objects.filter(pk=pk).values()[0]["password"])
-        if(usuario_data.get("password") == ""): #si la password viene vacia reemplazala por el valor ya almacenado
+        if(usuario_data.get("password") == "" and usuario_data.get("password2") == "" ): #si la password viene vacia reemplazala por el valor ya almacenado
             usuario_data.update(password=User.objects.filter(pk=pk).values()[0]["password"])
-        if(usuario_data.get("password2") == ""):
             usuario_data.update(password2=User.objects.filter(pk=pk).values()[0]["password"])
-        serializer = RegisterSerializer(usuario, data=usuario_data) 
-        if serializer.is_valid(): 
-            if ('password' in usuario_data):
+            serializer = RegisterSerializer(usuario, data=usuario_data)
+            if serializer.is_valid(): 
+              serializer.save()  
+              return JsonResponse(serializer.data) 
+        elif ('password' in usuario_data):
                 password = make_password(usuario_data['password'])
-            serializer.save(password=password) 
-            return JsonResponse(serializer.data) 
+                serializer = RegisterSerializer(usuario, data=usuario_data)
+                if serializer.is_valid(): 
+                   serializer.save(password=password)  
+                   return JsonResponse(serializer.data) 
+        
+            
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
     elif request.method == 'DELETE': 
