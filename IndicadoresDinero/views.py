@@ -14,7 +14,7 @@ class IndicadoresView(APIView):
         return Response(serializer.data, status = status.HTTP_200_OK)
     
     def post(self, request, format = None):
-        request.data['fecha'] = datetime.now().strftime("%Y/%m/%d")
+        request.data['fecha'] = datetime.now().strftime("%m/%d/%Y")
         serializer = IndicadoresSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
