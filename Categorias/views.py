@@ -5,6 +5,7 @@ from rest_framework import status
 from Categorias.serializers import CategoriasSerializer
 from Categorias.models import CategoriasModel
 
+from django.db.models import Q
 # Create your views here.
 
 class CategoriasView(APIView):
@@ -61,19 +62,13 @@ class CategoriasViewDetail(APIView):
     
 class CategoriaEntrada(APIView):
     def get(self, request, format = None):
-        queryset = CategoriasModel.objects.filter(descripcion="INGRESO")
-        serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
-        return Response(serializer.data, status = status.HTTP_200_OK)
-    
-    
-class CategoriaGasto(APIView):
-    def get(self, request, format = None):
-        queryset = CategoriasModel.objects.filter(descripcion = "GASTO-AOC")
+        queryset = CategoriasModel.objects.filter(descripcion = "INGRESO")
         serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
         return Response(serializer.data, status = status.HTTP_200_OK)
 
-class CategoriaCosto(APIView):
+class CategoriaSalida(APIView):
     def get(self, request, format = None):
-        queryset = CategoriasModel.objects.filter(descripcion = "COSTO-VENTA")
+        queryset = CategoriasModel.objects.filter(Q(descripcion = "COSTO-VENTA") | Q(descripcion = "GASTO-AOC"))
         serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
+        print(serializer.data)
         return Response(serializer.data, status = status.HTTP_200_OK)
