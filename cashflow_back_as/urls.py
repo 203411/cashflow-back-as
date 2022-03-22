@@ -28,5 +28,6 @@ urlpatterns = [
     re_path(r'^cash_flow/flujo/', include('FlujoEfectivo.urls')),
     re_path(r'^cash_flow/indicadores/', include('IndicadoresDinero.urls')),
     re_path(r'^cash_flow/categorias/', include('Categorias.urls')),
+    re_path(r'^cash_flow/reporte_indicadores/', include('ReporteIndicadores.urls')),
     re_path(r'^cash_flow/reporte_categorias/', include('ReporteCategorias.urls')),
 ]
