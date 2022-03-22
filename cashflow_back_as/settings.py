@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'FlujoEfectivo',
     'IndicadoresDinero',
     'Categorias',
+    'ReporteCategorias',
     
     # Librerias instaladas
     'rest_framework',

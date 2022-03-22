@@ -22,7 +22,8 @@ class FlujoView(APIView):
         return Response(serializer.data, status = status.HTTP_200_OK)
     
     def post(self, request, format = None):
-        categoria = self.get_objectCategoria(request.data['id_categoria'])
+        idCategoria = request.data['id_categoria']
+        categoria = self.get_objectCategoria(idCategoria)
         if(categoria != 404):
             request.data['fecha'] = datetime.now().strftime("%m/%d/%Y")
             serializer = FlujoSerializer(data = request.data)

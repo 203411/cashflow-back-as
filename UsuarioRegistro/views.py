@@ -47,14 +47,14 @@ def user_detail(request, pk):
             usuario_data.update(password2=User.objects.filter(pk=pk).values()[0]["password"])
             serializer = RegisterSerializer(usuario, data=usuario_data)
             if serializer.is_valid(): 
-              serializer.save()  
-              return JsonResponse(serializer.data) 
+                serializer.save()  
+                return JsonResponse(serializer.data) 
         elif ('password' in usuario_data):
                 password = make_password(usuario_data['password'])
                 serializer = RegisterSerializer(usuario, data=usuario_data)
                 if serializer.is_valid(): 
-                   serializer.save(password=password)  
-                   return JsonResponse(serializer.data) 
+                    serializer.save(password=password)  
+                    return JsonResponse(serializer.data) 
         
             
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 

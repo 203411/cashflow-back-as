@@ -70,5 +70,4 @@ class CategoriaSalida(APIView):
     def get(self, request, format = None):
         queryset = CategoriasModel.objects.filter(Q(descripcion = "COSTO-VENTA") | Q(descripcion = "GASTO-AOC"))
         serializer = CategoriasSerializer(queryset, many = True, context = {'request':request})
-        print(serializer.data)
         return Response(serializer.data, status = status.HTTP_200_OK)

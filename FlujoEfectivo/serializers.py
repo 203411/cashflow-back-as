@@ -7,4 +7,3 @@ class FlujoSerializer(serializers.ModelSerializer):
     class Meta:
         model = FlujoModel
         fields = ('__all__')
-        
