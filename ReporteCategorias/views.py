@@ -32,6 +32,7 @@ class ReporteCategoriasView(APIView):
             subCategoria = dataC.filter(id=f.id_categoria.id).values()[0]['sub_categoria']
             dia = int(f.fecha[3:5])
             mes = int(f.fecha[:2])
+
             if(dia < 8 and mes == mesUser):
                 semana = 0
             if ((dia > 7 and dia < 15) and mes == mesUser):
@@ -61,8 +62,6 @@ class ReporteCategoriasView(APIView):
         for i in [0,1,2,3,4]:
             diferencia[i] = ingresos[2][i] - gastos[2][i]
             rentabilidad[i] = round((diferencia[i]*100)/ingresos[2][i])
-        # print(cantidadEntrada)
-
         result.append({
                 'cantidadEntrada' : ingresos,
                 'cantidadSalida' : gastos,
