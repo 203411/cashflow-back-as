@@ -5,7 +5,6 @@ from rest_framework import status
 from FlujoEfectivo.models import FlujoModel
 from Categorias.models import CategoriasModel
 from django.http import JsonResponse
-
 # Create your views here.
 
 class ReporteCategoriasView(APIView):
@@ -20,11 +19,11 @@ class ReporteCategoriasView(APIView):
         ingresos = [
         [0,0,0,0,0], #fila de efectivo
         [0,0,0,0,0], #fila de depositos
-        [0,0,0,0,0]] #fila de totales
+        [1,1,1,1,0]] #fila de totales
         gastos = [
         [0,0,0,0,0], #fila de costo-venta
         [0,0,0,0,0], #fila de gasto-aoc
-        [0,0,0,0,0]] #fila de totales
+        [1,1,1,1,0]] #fila de totales
 
         diferencia = [0,0,0,0,0] #fila de Total utilidad
         rentabilidad = [0,0,0,0,0] #fila de margen de rentabilidad
@@ -36,13 +35,13 @@ class ReporteCategoriasView(APIView):
             mes = int(f.fecha[:2])
 
             if(mes == mesUser):
-                if(dia < 8 and mes == mesUser):
+                if(dia < 8):
                     semana = 0
-                if ((dia > 7 and dia < 15) and mes == mesUser):
+                if (dia > 7 and dia < 15):
                     semana = 1
-                if((dia>14 and dia < 22) and mes == mesUser):
+                if(dia>14 and dia < 22):
                     semana = 2
-                if((dia>21) and mes == mesUser):
+                if(dia>21):
                     semana = 3
 
                 if(subCategoria == "EFECTIVO"):
