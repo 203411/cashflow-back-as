@@ -33,7 +33,7 @@ class ReporteCategoriasView(APIView):
         for f in dataF:
             categoria = dataC.filter(id=f.id_categoria.id).values()[0]['descripcion']
             subCategoria = dataC.filter(id=f.id_categoria.id).values()[0]['sub_categoria']
-            fecha = f.fecha.split('/', maxsplit=2) #divide la fecha en [mes,dia,año]
+            fecha = f.fecha.split('/', maxsplit=2) #divide la fecha dentro de un arreglo de la siguiente forma [mes,dia,año]
             for data in fecha:
                 fecha[fecha.index(data)] = int(data) #convierte la string a numero entero
             if(fecha[0] == mesUser):
