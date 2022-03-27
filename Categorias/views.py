@@ -23,6 +23,8 @@ class CategoriasView(APIView):
     def post(self, request, format = None):
         exist = self.get_object(request.data['sub_categoria'])
         if(exist == 0):
+            request.data['descripcion'] = request.data['descripcion'].upper()
+            request.data['sub_categoria'] = request.data['sub_categoria'].upper()
             serializer = CategoriasSerializer(data = request.data)
             if serializer.is_valid():
                 serializer.save()
@@ -47,6 +49,8 @@ class CategoriasViewDetail(APIView):
     
     def put(self, request, pk, format = None):
         idResponse = self.get_object(pk)
+        request.data['descripcion'] = request.data['descripcion'].upper()
+        request.data['sub_categoria'] = request.data['sub_categoria'].upper()
         serializer = CategoriasSerializer(idResponse, data = request.data)
         if serializer.is_valid():
             serializer.save()

@@ -1,3 +1,4 @@
+from calendar import month
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,6 +17,7 @@ class ReporteCategoriasView(APIView):
         registros = False
         sumaCantidades = 0
         result = []
+        fecha = []
         ingresos = [
         [0,0,0,0,0], #fila de efectivo
         [0,0,0,0,0], #fila de depositos
@@ -31,28 +33,28 @@ class ReporteCategoriasView(APIView):
         for f in dataF:
             categoria = dataC.filter(id=f.id_categoria.id).values()[0]['descripcion']
             subCategoria = dataC.filter(id=f.id_categoria.id).values()[0]['sub_categoria']
-            dia = int(f.fecha[3:5])
-            mes = int(f.fecha[:2])
-
-            if(mes == mesUser):
-                if(dia < 8):
+            fecha = f.fecha.split('/', maxsplit=2) #divide la fecha en [mes,dia,año]
+            for data in fecha:
+                fecha[fecha.index(data)] = int(data) #convierte la string a numero entero
+            if(fecha[0] == mesUser):
+                if(fecha[1] < 8):
                     semana = 0
-                if (dia > 7 and dia < 15):
+                if (fecha[1] > 7 and fecha[1] < 15):
                     semana = 1
-                if(dia>14 and dia < 22):
+                if(fecha[1]>14 and fecha[1] < 22):
                     semana = 2
-                if(dia>21):
+                if(fecha[1]>21):
                     semana = 3
 
-                if(subCategoria == "EFECTIVO"):
+                if(subCategoria.upper() == "EFECTIVO"):
                     ingresos[0][semana] += f.cantidad
-                elif(subCategoria == "DEPOSITO"):
+                elif(subCategoria.upper() == "DEPOSITO"):
                     ingresos[1][semana] += f.cantidad
                 ingresos[2][semana] = ingresos[0][semana] + ingresos[1][semana]
 
-                if(categoria == "COSTO-VENTA"):
+                if(categoria.upper() == "COSTO-VENTA"):
                     gastos[0][semana] += f.cantidad
-                elif(categoria == "GASTO-AOC"):
+                elif(categoria.upper() == "GASTO-AOC"):
                     gastos[1][semana] += f.cantidad
                 gastos[2][semana] = gastos[0][semana] + gastos[1][semana]      
         
